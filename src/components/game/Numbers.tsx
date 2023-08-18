@@ -1,5 +1,7 @@
-import _ from 'lodash'
+import _, { reduce } from 'lodash'
 import styled from 'styled-components'
+import { CharacterMap } from '../../utils'
+import { useSudokuContext } from '../../context/SudokuContext'
 
 const NumbersWrapper = styled.div`
   display: grid;
@@ -15,22 +17,38 @@ const StatusNumber = styled.div`
   font-size: 26px;
   padding: 12px 0;
   cursor: pointer;
+  user-select: none;
+
+  &.full {
+    opacity: 0.2;
+  }
 `
 
 type NumbersProps = {
   onClickNumber: (number: string) => void
+  characterMap: CharacterMap
 }
 
-export const Numbers = ({ onClickNumber }: NumbersProps) => (
-  <NumbersWrapper>
-    {_.times(9, n => {
-      const number = n + 1
+export const Numbers = ({ onClickNumber, characterMap }: NumbersProps) => {
+  const { gameArray } = useSudokuContext()
 
-      return (
-        <StatusNumber key={number} onClick={() => onClickNumber(number.toString())}>
-          {number}
-        </StatusNumber>
-      )
-    })}
-  </NumbersWrapper>
-)
+  return (
+    <NumbersWrapper>
+      {_.times(9, n => {
+        const number = n + 1
+        const stringNum = `${number}`
+        const count = reduce(gameArray, (acc, value) => acc + (value == stringNum ? 1 : 0), 0)
+
+        return (
+          <StatusNumber
+            className={count === 9 ? 'full' : undefined}
+            key={number}
+            onClick={() => onClickNumber(number.toString())}
+          >
+            {characterMap[`${number}`]}
+          </StatusNumber>
+        )
+      })}
+    </NumbersWrapper>
+  )
+}

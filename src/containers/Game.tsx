@@ -7,10 +7,10 @@ import { useSudokuContext } from '../context/SudokuContext'
 import styled from 'styled-components'
 import { ThemeColor, themeColor } from '../theme'
 import { Overlay } from '../components/Overlay'
-import { isSSR } from '../utils'
+import { CharacterMap, defaultCharacterMap, isSSR } from '../utils'
 
-const PageWrapper = styled.div`
-  max-width: 700px;
+const PageWrapper = styled.div<{ maxWidth: number }>`
+  max-width: ${({ maxWidth }) => `${maxWidth}px`};
   min-width: 270px;
   margin: 0 auto;
   padding: 0 10px;
@@ -34,7 +34,12 @@ const OverlayText = styled.span<{ color: ThemeColor }>`
   color: ${({ color }) => themeColor(color)};
 `
 
-export const Game = () => {
+type GameProps = {
+  characterMap?: CharacterMap
+  maxWidth?: number
+}
+
+export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: GameProps) => {
   const {
     setNumberSelected,
     gameArray,
@@ -157,9 +162,9 @@ export const Game = () => {
 
   return (
     <>
-      <PageWrapper className={overlay ? 'blur' : ''}>
+      <PageWrapper className={overlay ? 'blur' : ''} maxWidth={maxWidth}>
         <InnerContainer>
-          <GameSection onClick={(indexOfArray: number) => onClickCell(indexOfArray)} />
+          <GameSection characterMap={characterMap} onClick={(indexOfArray: number) => onClickCell(indexOfArray)} />
           <StatusSection
             newGame={createNewGame}
             onClickNumber={(number: string) => onClickNumber(number)}
@@ -168,6 +173,7 @@ export const Game = () => {
             onClickErase={onClickErase}
             onClickHint={onClickHint}
             onClickMistakesMode={onClickMistakesMode}
+            characterMap={characterMap}
           />
         </InnerContainer>
       </PageWrapper>

@@ -2,6 +2,7 @@ import _ from 'lodash'
 import styled from 'styled-components'
 import { useSudokuContext } from '../../context/SudokuContext'
 import { themeColor } from '../../theme'
+import { CharacterMap } from '../../utils'
 
 const GameBoard = styled.table`
   font-family: 'Noto Sans', sans-serif;
@@ -24,6 +25,7 @@ const GameBoard = styled.table`
     cursor: pointer;
     width: 48px;
     height: 48px;
+    text-align: center;
 
     &.filled {
       color: ${themeColor('secondary')};
@@ -70,9 +72,10 @@ const GameBoard = styled.table`
 
 type GameSectionProps = {
   onClick: (indexOfArray: number) => void
+  characterMap: CharacterMap
 }
 
-export const GameSection = (props: GameSectionProps) => {
+export const GameSection = ({ onClick, characterMap }: GameSectionProps) => {
   const rows = _.times(9, x => x)
   let { gameArray, cellSelected, initArray } = useSudokuContext()
 
@@ -95,26 +98,22 @@ export const GameSection = (props: GameSectionProps) => {
           <td
             className={`cell user-filled ${highlight}selected`}
             key={indexOfArray}
-            onClick={() => props.onClick(indexOfArray)}
+            onClick={() => onClick(indexOfArray)}
           >
-            {value}
+            {characterMap[value]}
           </td>
         )
       } else {
         return (
-          <td
-            className={`cell filled ${highlight}selected`}
-            key={indexOfArray}
-            onClick={() => props.onClick(indexOfArray)}
-          >
-            {value}
+          <td className={`cell filled ${highlight}selected`} key={indexOfArray} onClick={() => onClick(indexOfArray)}>
+            {characterMap[value]}
           </td>
         )
       }
     } else {
       return (
-        <td className={`cell ${highlight}selected`} key={indexOfArray} onClick={() => props.onClick(indexOfArray)}>
-          {value}
+        <td className={`cell ${highlight}selected`} key={indexOfArray} onClick={() => onClick(indexOfArray)}>
+          {characterMap[value]}
         </td>
       )
     }
@@ -124,19 +123,19 @@ export const GameSection = (props: GameSectionProps) => {
     if (value !== '0') {
       if (initArray[indexOfArray] === '0') {
         return (
-          <td className="cell user-filled" key={indexOfArray} onClick={() => props.onClick(indexOfArray)}>
-            {value}
+          <td className="cell user-filled" key={indexOfArray} onClick={() => onClick(indexOfArray)}>
+            {characterMap[value]}
           </td>
         )
       } else {
         return (
-          <td className="cell filled" key={indexOfArray} onClick={() => props.onClick(indexOfArray)}>
-            {value}
+          <td className="cell filled" key={indexOfArray} onClick={() => onClick(indexOfArray)}>
+            {characterMap[value]}
           </td>
         )
       }
     } else {
-      return <td className="cell" key={indexOfArray} onClick={() => props.onClick(indexOfArray)}></td>
+      return <td className="cell" key={indexOfArray} onClick={() => onClick(indexOfArray)}></td>
     }
   }
 

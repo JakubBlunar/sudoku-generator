@@ -5,6 +5,7 @@ import { Numbers } from '../game/Numbers'
 import { Action } from '../game/Action'
 import { MistakeMode } from '../game/Mode'
 import styled from 'styled-components'
+import { CharacterMap } from '../../utils'
 
 const StatusSectionWrapper = styled.section`
   width: 30%;
@@ -26,6 +27,7 @@ type StatusSectionProps = {
   onClickHint: () => void
   onClickMistakesMode: () => void
   newGame: () => void
+  characterMap: CharacterMap
 }
 
 export const StatusSection = (props: StatusSectionProps) => (
@@ -33,7 +35,7 @@ export const StatusSection = (props: StatusSectionProps) => (
     <div>
       <Difficulty onChange={props.onChange} newGame={props.newGame} />
       <Timer />
-      <Numbers onClickNumber={number => props.onClickNumber(number)} />
+      <Numbers characterMap={props.characterMap} onClickNumber={number => props.onClickNumber(number)} />
       <StatusActionsWrapper>
         <Action action="undo" onClickAction={props.onClickUndo} />
         <Action action="erase" onClickAction={props.onClickErase} />

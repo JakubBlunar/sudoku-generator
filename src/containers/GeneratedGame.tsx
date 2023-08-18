@@ -4,7 +4,7 @@ import { useSudokuContext } from '../context/SudokuContext'
 import { getUniqueSudoku } from '../solver/UniqueSudoku'
 import { GameSection } from '../components/layout/GameSection'
 import styled from 'styled-components'
-import { isSSR } from '../utils'
+import { defaultCharacterMap, isSSR } from '../utils'
 
 const GeneratedGameWrapper = styled.div`
   padding: 15px;
@@ -38,7 +38,7 @@ export const GeneratedGame = ({ initCells }: GeneratedGameProps) => {
 
   return (
     <GeneratedGameWrapper>
-      <GameSection onClick={_.noop} />
+      <GameSection onClick={_.noop} characterMap={defaultCharacterMap} />
     </GeneratedGameWrapper>
   )
 }
