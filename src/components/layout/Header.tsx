@@ -43,19 +43,13 @@ export const Header = () => {
         </h1>
       </Link>
       <Link href="/game">
-        <a>
-          <Button>Play sudoku</Button>
-        </a>
+        <Button>Play sudoku</Button>
       </Link>
       <Link href="/alphabet-game">
-        <a>
-          <Button>Play Alphabet sudoku</Button>
-        </a>
+        <Button>Play Alphabet sudoku</Button>
       </Link>
       <Link href="/generator">
-        <a>
-          <Button>Generator</Button>
-        </a>
+        <Button>Generator</Button>
       </Link>
     </HeaderWrapper>
   )
