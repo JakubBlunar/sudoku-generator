@@ -2,4 +2,4 @@
 
 Sudoku game and sudoku printable generator in react.
 
-Deployed on [heroku](https://sudoku-gtr.herokuapp.com/)
+Deployed on [vercel](https://sudoku-gtr.vercel.app/)
