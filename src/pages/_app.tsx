@@ -2,6 +2,7 @@ import { GlobalStyle, theme } from '../theme'
 import { ThemeProvider } from 'styled-components'
 import type { AppProps } from 'next/app'
 import { Helmet } from 'react-helmet'
+import { Analytics } from '@vercel/analytics/next'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -12,6 +13,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content="Free sudoku game and printable sudoku generator" />
       </Helmet>
       <Component {...pageProps} />
+      <Analytics />
     </ThemeProvider>
   )
 }
