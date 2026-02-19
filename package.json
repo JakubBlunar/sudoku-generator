@@ -5,6 +5,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "lodash": "^4.17.21",
     "moment": "2.29.3",
     "next": "^14.2.31",
