@@ -5,14 +5,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@vercel/analytics": "^1.6.1",
+    "@emotion/is-prop-valid": "^1.4.0",
+    "@vercel/analytics": "^2.0.1",
     "lodash": "^4.17.21",
     "moment": "2.29.3",
-    "next": "^14.2.31",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-helmet": "^6.1.0",
-    "styled-components": "5.3.5",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "styled-components": "^6.5.3",
     "typescript": "5.9.2"
   },
   "engines": {
@@ -23,32 +23,15 @@
     "build": "next build",
     "start": "next start -p $PORT"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "13.2.0",
-    "@testing-library/user-event": "14.2.0",
-    "@types/lodash": "^4.14.182",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/lodash": "^4.17.20",
     "@types/node": "22.9.0",
     "@types/qs": "^6.9.7",
-    "@types/react": "18.0.9",
-    "@types/react-dom": "18.0.4",
-    "@types/react-helmet": "^6.1.5",
-    "@types/styled-components": "^5.1.25",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
     "babel-plugin-styled-components": "^2.0.7"
   }
 }

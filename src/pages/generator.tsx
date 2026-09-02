@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Router from 'next/router'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { Layout, ContentWrapper } from '../components/layout/Layout'
 import styled from 'styled-components'
 import { Button } from '../components/common/Button'
@@ -59,10 +59,10 @@ const Generator = () => {
 
   return (
     <Layout>
-      <Helmet>
+      <Head>
         <title>Sudoku generator</title>
         <meta name="description" content="Generate free printable sudoku games" />
-      </Helmet>
+      </Head>
       <ContentWrapper>
         <StyledForm
           onSubmit={e => {

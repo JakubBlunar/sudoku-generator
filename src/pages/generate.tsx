@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { GeneratedGame } from '../containers/GeneratedGame'
 import { SudokuProvider } from '../context/SudokuContext'
 import { isSSR } from '../utils'
@@ -26,9 +26,9 @@ const Generate = () => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <meta name="robots" content="no-index" />
-      </Helmet>
+      </Head>
       {_.map(chunks, (chunk, i) => (
         <div
           key={`page-${i}`}

@@ -1,4 +1,5 @@
-import { createGlobalStyle, ThemedStyledProps } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
+import type { DefaultTheme } from 'styled-components'
 
 export const theme = {
   colors: {
@@ -16,8 +17,8 @@ export const theme = {
 export type Theme = typeof theme
 export type ThemeColor = keyof Theme['colors']
 
-export function themeColor(color: ThemeColor): (p: ThemedStyledProps<unknown, Theme>) => string {
-  return ({ theme }) => theme.colors[color]
+export function themeColor(color: ThemeColor): (p: { theme?: DefaultTheme }) => string {
+  return ({ theme }) => (theme as Theme).colors[color]
 }
 
 export const GlobalStyle = createGlobalStyle`

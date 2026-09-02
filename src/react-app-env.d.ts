@@ -1,5 +1,3 @@
-/// <reference types="react-scripts" />
-
 import { Theme } from './theme'
 
 declare module 'styled-components' {
