@@ -1,85 +1,107 @@
 import styled from 'styled-components'
 import { themeColor } from '../../theme'
 
-const MistakeModeWrapper = styled.div`
-  text-align: center;
+const MistakeModeWrapper = styled.div<{ $active: boolean }>`
   position: relative;
-  width: 60%;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid ${({ $active }) => ($active ? themeColor('primary') : themeColor('secondaryLightest'))};
+  background: ${({ $active }) => ($active ? themeColor('secondaryLightest') : '#fff')};
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.14s ease, background-color 0.14s ease;
+
+  & .label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: ${themeColor('secondary')};
+    }
+
+    .desc {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: ${themeColor('muted')};
+    }
+  }
 
   & .switch {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 16px;
+    position: relative;
     display: inline-block;
-    width: 46px;
-    height: 26px;
+    width: 40px;
+    height: 22px;
+    flex: 0 0 auto;
 
     input {
       opacity: 0;
-      width: 0;
-      height: 0;
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      pointer-events: none;
     }
 
     .slider {
       position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background-color: ${themeColor('secondaryLighter')};
-      border-radius: 26px;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
+      border-radius: 22px;
+      transition: background-color 0.22s ease, box-shadow 0.22s ease;
+      pointer-events: none;
     }
 
     .slider:before {
       position: absolute;
       content: '';
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
+      height: 18px;
+      width: 18px;
+      left: 2px;
+      top: 2px;
       background-color: ${themeColor('bgColor')};
       border-radius: 50%;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
+      box-shadow: 0 1px 2px ${themeColor('shadow')};
+      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    input:checked + .slider {
+    input:checked ~ .slider {
       background-color: ${themeColor('primary')};
     }
 
-    input:focus + .slider {
-      box-shadow: 0 0 1px ${themeColor('primary')};
+    input:checked ~ .slider:before {
+      transform: translateX(18px);
     }
 
-    input:checked + .slider:before {
-      -webkit-transform: translateX(20px);
-      -ms-transform: translateX(20px);
-      transform: translateX(20px);
+    input:focus-visible ~ .slider {
+      box-shadow: 0 0 0 3px ${themeColor('secondaryLighter')};
     }
-  }
-
-  & .text {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.2;
-    padding-top: 50px;
   }
 `
 
 type ModeProps = {
+  active: boolean
   onClickMode: () => void
 }
 
 export const MistakeMode = (props: ModeProps) => (
-  <MistakeModeWrapper>
-    <label className="switch">
-      <input type="checkbox" />
-      <span className="slider" onClick={props.onClickMode}></span>
+  <MistakeModeWrapper $active={props.active} onClick={props.onClickMode}>
+    <div className="label">
+      <span className="title">Mistakes mode</span>
+      <span className="desc">Only accept correct values</span>
+    </div>
+    <label className="switch" onClick={e => e.preventDefault()}>
+      <input type="checkbox" checked={props.active} readOnly />
+      <span className="slider" aria-hidden="true"></span>
     </label>
-    <p className="text">{'Mistakes Mode'}</p>
   </MistakeModeWrapper>
 )

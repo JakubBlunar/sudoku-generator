@@ -9,23 +9,89 @@ import { ThemeColor, themeColor } from '../theme'
 import { Overlay } from '../components/Overlay'
 import { CharacterMap, defaultCharacterMap, isSSR } from '../utils'
 
-const PageWrapper = styled.div<{ maxWidth: number }>`
-  max-width: ${({ maxWidth }) => `${maxWidth}px`};
-  min-width: 270px;
-  margin: 0 auto;
-  padding: 0 10px;
+const GamePageCard = styled.div`
+  width: 100%;
+  max-width: 1080px;
+  margin: 12px auto 40px;
+  padding: 28px 28px 26px;
+  background: #fff;
+  border: 1px solid ${themeColor('secondaryLightest')};
+  border-radius: 20px;
+  box-shadow:
+    0 1px 2px ${themeColor('shadow')},
+    0 16px 40px -18px ${themeColor('shadowLg')};
+
+  @media (max-width: 640px) {
+    margin: 4px 10px 28px;
+    padding: 16px 12px 14px;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px ${themeColor('shadow')}, 0 10px 24px -14px ${themeColor('shadowLg')};
+  }
+
+  @media print {
+    all: revert;
+    box-shadow: none;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    border-radius: 0;
+  }
 `
 
-const InnerContainer = styled.div`
-  display: flex;
-  color: ${themeColor('secondary')};
-  flex-wrap: wrap;
-  padding: 0 20px;
+const GameGrid = styled.div`
+  display: grid;
+  align-items: start;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  grid-template-areas: "board controls";
 
-  @media screen and (max-width: 670px) {
-    & {
-      max-width: 500px;
-      margin: 0 auto;
+  > :nth-child(1) {
+    grid-area: board;
+    justify-self: center;
+    width: max-content;
+  }
+
+  > :nth-child(2) {
+    grid-area: controls;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "board"
+      "controls";
+    gap: 28px;
+
+    > :nth-child(1) {
+      justify-self: center;
+    }
+
+    > :nth-child(2) {
+      width: 100%;
+    }
+  }
+
+  /* Board is a fixed 434px wide (9 × 48px cells) to keep print sizing exact.
+     On narrow phones we zoom it down (zoom scales the layout box, unlike
+     transform), preventing horizontal overflow. Print resets it to full size. */
+  @media (max-width: 480px) {
+    > :nth-child(1) {
+      zoom: 0.8;
+    }
+  }
+
+  @media print {
+    display: block;
+    gap: 0;
+
+    > :nth-child(1) {
+      zoom: 1;
+    }
+
+    > :nth-child(2) {
+      display: none;
     }
   }
 `
@@ -162,10 +228,11 @@ export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: Gam
 
   return (
     <>
-      <PageWrapper className={overlay ? 'blur' : ''} maxWidth={maxWidth}>
-        <InnerContainer>
+      <GamePageCard className={overlay ? 'blur' : ''}>
+        <GameGrid>
           <GameSection characterMap={characterMap} onClick={(indexOfArray: number) => onClickCell(indexOfArray)} />
           <StatusSection
+            mistakesMode={mistakesMode}
             newGame={createNewGame}
             onClickNumber={(number: string) => onClickNumber(number)}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChangeDifficulty(e)}
@@ -175,8 +242,8 @@ export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: Gam
             onClickMistakesMode={onClickMistakesMode}
             characterMap={characterMap}
           />
-        </InnerContainer>
-      </PageWrapper>
+        </GameGrid>
+      </GamePageCard>
       <Overlay onClick={onClickOverlay} visible={overlay}>
         You <OverlayText color="secondaryLighter">solved</OverlayText> <OverlayText color="primary">it!</OverlayText>
       </Overlay>

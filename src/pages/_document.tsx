@@ -23,13 +23,16 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" data-scroll-behavior="smooth">
         <Head>
           <link
             href="https://fonts.googleapis.com/css?family=Teko|Noto+Sans|Source+Sans+Pro:300,400,600"
             rel="stylesheet"
             type="text/css"
           />
+          <link rel="icon" type="image/png" href="/favicon.png" />
+          <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <body>
           <Main />

@@ -11,7 +11,7 @@ const Generate = () => {
 
   const params = router.query || {}
 
-  const count = params.count ? Number(params.count) : 6
+  const count = params.count ? Number(params.count) : 24
   const initCells = params.initCells ? Number(params.initCells) : undefined
 
   const chunks = _.chunk(

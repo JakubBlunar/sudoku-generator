@@ -1,56 +1,147 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 import { themeColor } from '../../theme'
-import { Button } from '../common/Button'
 
 const HeaderWrapper = styled.header`
-  position: relative;
-  border-bottom: 2px solid ${themeColor('secondary')};
-  padding: 15px;
-  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid ${themeColor('secondaryLightest')};
+  box-shadow: 0 1px 0 ${themeColor('shadow')};
 
-  h1,
-  button {
-    margin-inline-end: 20px;
+  .logo {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-decoration: none;
+
+    .g1 {
+      color: ${themeColor('secondary')};
+    }
+
+    .g2 {
+      color: ${themeColor('primary')};
+      transition: color 0.16s ease;
+    }
+
+    .g3 {
+      color: ${themeColor('secondaryLight')};
+    }
+
+    &:hover .g2 {
+      color: ${themeColor('primaryDark')};
+    }
   }
 
-  h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: ${themeColor('secondary')};
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
 
+    a + a {
+      margin-left: 4px;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    outline: none;
     cursor: pointer;
+    padding: 0 16px;
+    background-color: ${themeColor('secondary')};
+    border-radius: 10px;
+    border: 1px solid ${themeColor('secondary')};
+    color: ${themeColor('bgColor')};
+    font-size: 13.5px;
+    line-height: 38px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+
+    &:hover {
+      background-color: ${themeColor('primaryDark')};
+      border-color: ${themeColor('primaryDark')};
+      box-shadow: 0 6px 16px ${themeColor('shadowLg')};
+    }
   }
 
-  .g1 {
-    color: ${themeColor('primary')};
+  .btn.primary {
+    background: linear-gradient(180deg, ${themeColor('primary')} 0%, ${themeColor('primaryDark')} 100%);
+    border-color: ${themeColor('primaryDark')};
   }
 
-  .g2 {
-    color: ${themeColor('secondaryLight')};
+  @media (max-width: 720px) {
+    padding: 10px 16px;
+
+    .logo {
+      order: 1;
+      font-size: 24px;
+    }
+
+    nav {
+      order: 2;
+      margin-left: 0;
+      flex: 1 1 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 4px;
+      padding-bottom: 2px;
+      scrollbar-width: thin;
+
+      a + a {
+        margin-left: 4px;
+      }
+    }
+
+    .btn {
+      white-space: nowrap;
+      font-size: 12.5px;
+      line-height: 34px;
+      padding: 0 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn {
+      font-size: 12px;
+      padding: 0 10px;
+      line-height: 32px;
+    }
   }
 `
 
 export const Header = () => {
   return (
     <HeaderWrapper className="header">
-      <Link href="/">
-        <h1>
-          Su<span className="g1">do</span>
-          <span className="g2">ku</span>
-        </h1>
+      <Link href="/" className="logo">
+        <span className="g1">Su</span>
+        <span className="g2">do</span>
+        <span className="g3">ku</span>
       </Link>
-      <Link href="/game">
-        <Button>Play sudoku</Button>
-      </Link>
-      <Link href="/alphabet-game">
-        <Button>Play Alphabet sudoku</Button>
-      </Link>
-      <Link href="/generator">
-        <Button>Generator</Button>
-      </Link>
+      <nav>
+        <Link href="/game" className="btn">
+          Play sudoku
+        </Link>
+        <Link href="/alphabet-game" className="btn">
+          Alphabet
+        </Link>
+        <Link href="/generator" className="btn primary">
+          Generator
+        </Link>
+      </nav>
     </HeaderWrapper>
   )
 }

@@ -25,3 +25,5 @@ yarn-error.log*
 .eslintcache
 .next
 .playwright-mcp
+public/_preview.png
+tsconfig.tsbuildinfo

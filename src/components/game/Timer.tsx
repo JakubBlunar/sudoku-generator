@@ -6,18 +6,22 @@ import { themeColor } from '../../theme'
 import { isSSR } from '../../utils'
 
 const TimeBox = styled.div`
-  position: relative;
-  top: 20px;
-  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   text-align: center;
-  font-family: 'Teko', sans-serif;
-  font-size: 30px;
-  line-height: 1.5;
-  letter-spacing: 0.2em;
-  background-color: ${themeColor('ternary')};
-  color: ${themeColor('secondaryLight')};
-  padding-top: 4px;
-  margin: 0 30px;
+  width: 104px;
+  font-family: 'TEKO', sans-serif;
+  font-size: 27px;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: ${themeColor('secondary')};
+  background: linear-gradient(180deg, ${themeColor('secondaryLightest')} 0%, ${themeColor('ternary')} 100%);
+  border: 1px solid ${themeColor('secondaryLighter')};
+  border-radius: 12px;
+  padding: 5px 16px 3px;
 `
 
 const useTimer = () => {

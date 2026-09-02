@@ -1,41 +1,53 @@
 import React from 'react'
 import styled from 'styled-components'
+import { themeColor } from '../../theme'
 
 const ActionIcon = styled.svg`
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: currentColor;
+
+  path {
+    fill: currentColor;
+  }
 `
 
-const ActionWrapper = styled.div`
-  text-align: center;
-  position: relative;
-  width: 33.33%;
+const ActionWrapper = styled.button`
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
+  border: 1px solid ${themeColor('secondaryLightest')};
+  background: #fff;
+  color: ${themeColor('secondary')};
+  border-radius: 12px;
+  padding: 10px 6px;
+  transition: background-color 0.14s ease, border-color 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
 
-  &.undo ${ActionIcon} {
-    top: 18px;
-    width: 38%;
-    height: 38%;
+  &:hover {
+    background: ${themeColor('primary')};
+    border-color: ${themeColor('primaryDark')};
+    color: #fff;
+    box-shadow: 0 8px 18px -8px ${themeColor('shadowLg')};
   }
 
-  &.erase ${ActionIcon} {
-    top: 20px;
-    width: 32%;
-    height: 32%;
-  }
-
-  &.hint ${ActionIcon} {
-    top: 11px;
-    width: 48%;
-    height: 48%;
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px ${themeColor('secondaryLighter')};
   }
 
   & .text {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 1.2;
-    padding-top: 50px;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
   }
 `
 

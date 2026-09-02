@@ -54,7 +54,7 @@ const NumberInput = ({ label, name, onChange, value, min, max }: NumberInputProp
 )
 
 const Generator = () => {
-  const [count, setCount] = useState<string>('30')
+  const [count, setCount] = useState<string>('24')
   const [initCells, setInitCells] = useState<string>('35')
 
   return (

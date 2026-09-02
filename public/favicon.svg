@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7cf0"/>
+      <stop offset="1" stop-color="#1a48a4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded blue tile (brand gradient: primary → primaryDark) -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <!-- 3x3 grid of white cells — all but the centre one -->
+  <g fill="#ffffff">
+    <rect x="9"  y="9"  width="14" height="14" rx="3"/>
+    <rect x="25" y="9"  width="14" height="14" rx="3"/>
+    <rect x="41" y="9"  width="14" height="14" rx="3"/>
+    <rect x="9"  y="25" width="14" height="14" rx="3"/>
+    <rect x="41" y="25" width="14" height="14" rx="3"/>
+    <rect x="9"  y="41" width="14" height="14" rx="3"/>
+    <rect x="25" y="41" width="14" height="14" rx="3"/>
+    <rect x="41" y="41" width="14" height="14" rx="3"/>
+  </g>
+
+  <!-- Subtle inner ring on the empty centre cell → "the puzzle slot" -->
+  <rect x="28" y="28" width="8" height="8" rx="1.5" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.75"/>
+</svg>

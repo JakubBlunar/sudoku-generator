@@ -6,17 +6,26 @@ import { Action } from '../game/Action'
 import { MistakeMode } from '../game/Mode'
 import styled from 'styled-components'
 import { CharacterMap } from '../../utils'
+import { themeColor } from '../../theme'
+import { Button } from '../common/Button'
 
-const StatusSectionWrapper = styled.section`
-  width: 30%;
+const Panel = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
 `
 
-const StatusActionsWrapper = styled.div`
-  position: relative;
-  top: 45px;
-  left: 10px;
+const TimerRow = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+`
+
+const ActionsRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  gap: 8px;
 `
 
 type StatusSectionProps = {
@@ -26,22 +35,30 @@ type StatusSectionProps = {
   onClickErase: () => void
   onClickHint: () => void
   onClickMistakesMode: () => void
+  mistakesMode: boolean
   newGame: () => void
   characterMap: CharacterMap
 }
 
 export const StatusSection = (props: StatusSectionProps) => (
-  <StatusSectionWrapper>
-    <div>
-      <Difficulty onChange={props.onChange} newGame={props.newGame} />
+  <Panel>
+    <Button onClick={props.newGame} type="button">
+      New Game
+    </Button>
+
+    <TimerRow>
       <Timer />
-      <Numbers characterMap={props.characterMap} onClickNumber={number => props.onClickNumber(number)} />
-      <StatusActionsWrapper>
-        <Action action="undo" onClickAction={props.onClickUndo} />
-        <Action action="erase" onClickAction={props.onClickErase} />
-        <Action action="hint" onClickAction={props.onClickHint} />
-        <MistakeMode onClickMode={props.onClickMistakesMode} />
-      </StatusActionsWrapper>
-    </div>
-  </StatusSectionWrapper>
+      <Difficulty onChange={props.onChange} />
+    </TimerRow>
+
+    <Numbers characterMap={props.characterMap} onClickNumber={number => props.onClickNumber(number)} />
+
+    <ActionsRow>
+      <Action action="undo" onClickAction={props.onClickUndo} />
+      <Action action="erase" onClickAction={props.onClickErase} />
+      <Action action="hint" onClickAction={props.onClickHint} />
+    </ActionsRow>
+
+    <MistakeMode active={props.mistakesMode} onClickMode={props.onClickMistakesMode} />
+  </Panel>
 )
