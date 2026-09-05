@@ -19,7 +19,7 @@ const Panel = styled.div`
 const TimerRow = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: center;
+  align-items: end;
   gap: 12px;
 `
 

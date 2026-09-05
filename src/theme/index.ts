@@ -75,22 +75,63 @@ img, svg { display: block; max-width: 100%; }
   filter: blur(2px);
 }
 
-@media all {
-  .page-break {
-    display: none;
-  }
+/* --- print output ------------------------------------------------------
+ * Only the /generator page opts in via a body class (see generator.tsx),
+ * so the OTHER pages (/game, /alphabet-game, …) print as normal.
+ *
+ * Strategy: hide the app chrome with display:none (so it takes NO space) and
+ * let the .print-sheet blocks flow in NORMAL FLOW with break-after: page —
+ * one sheet per A4 page. (The old approach used visibility:hidden plus
+ * position:absolute on the sheets; absolute positioning takes them out of
+ * flow and makes the page breaks collapse onto a single page.)           */
+@page {
+  size: A4 portrait;
+  margin: 0;
 }
 
 @media print {
-  .page-break {
-    display: block;
-    page-break-before: always;
-    break-after: page;
+  body.print-sheet-page {
+    background: #fff;
   }
 
-  .page-break:last-of-type {
-    page-break-before: auto;
-    break-after: auto;
+  /* App chrome that must not appear (or occupy space) on paper. */
+  body.print-sheet-page header,
+  body.print-sheet-page .no-print {
+    display: none !important;
+  }
+
+  /* Reset the app layout wrappers so the first sheet starts at the very top
+  of page 1 and the sheets stack one-per-page in normal flow. */
+  body.print-sheet-page main {
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.print-sheet-page .print-root {
+    display: block !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* One sheet = exactly one A4 page. */
+  .print-sheet {
+    position: static;
+    margin: 0;
+    break-after: page;
+    page-break-after: always;
+
+    &:last-of-type {
+      break-after: auto;
+      page-break-after: auto;
+    }
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 `

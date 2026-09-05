@@ -229,11 +229,6 @@ const CardLink = styled(Link)`
     border-color 0.22s ease,
     box-shadow 0.22s ease;
 
-  :hover {
-    transform: translateY(-4px);
-    border-color: ${themeColor('secondaryLighter')};
-    box-shadow: 0 18px 34px -20px ${themeColor('shadowLg')}, 0 2px 6px ${themeColor('shadow')};
-  }
 
   :focus-visible {
     outline: none;

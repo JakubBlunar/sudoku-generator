@@ -16,12 +16,13 @@ const TimeBox = styled.div`
   font-size: 27px;
   line-height: 1.2;
   letter-spacing: 0.14em;
+  height: 40px;
   font-variant-numeric: tabular-nums;
   color: ${themeColor('secondary')};
   background: linear-gradient(180deg, ${themeColor('secondaryLightest')} 0%, ${themeColor('ternary')} 100%);
   border: 1px solid ${themeColor('secondaryLighter')};
   border-radius: 12px;
-  padding: 5px 16px 3px;
+  padding: 8px 16px 3px;
 `
 
 const useTimer = () => {

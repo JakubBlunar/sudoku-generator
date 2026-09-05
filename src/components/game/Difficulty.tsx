@@ -29,6 +29,7 @@ const DifficultyWrapper = styled.div`
     font-size: 14px;
     font-weight: 600;
     line-height: 38px;
+    height: 40px;
     font-family: inherit;
     color: ${themeColor('secondary')};
     background-color: #fff;
