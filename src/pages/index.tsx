@@ -378,7 +378,7 @@ const IndexPage = () => (
           </Title>
           <Subtitle>
             A little web app for playing sudoku in the browser and for generating crisp, print-ready A4 sheets of
-            puzzles — up to six games per page, cut along the lines. Free, no sign-up, straight from the grid.
+            puzzles — 9 games per page, cut along the lines. Free, no sign-up, straight from the grid.
           </Subtitle>
           <CtaRow>
             <CtaButton href="/game">Play sudoku</CtaButton>
