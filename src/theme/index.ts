@@ -14,6 +14,8 @@ export const theme = {
     ternary: 'hsl(34, 26%, 89%)',
     ternaryDark: 'hsl(34, 76%, 89%)',
     text: '#000',
+    ink: 'hsl(213, 35%, 16%)',
+    gridLine: 'hsl(213, 25%, 78%)',
     muted: 'hsl(213, 12%, 42%)',
     success: 'hsl(142, 70%, 40%)',
     danger: 'hsl(0, 72%, 51%)',
