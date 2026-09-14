@@ -5,7 +5,7 @@ import { themeColor } from '../../theme'
 import { CharacterMap } from '../../utils'
 
 const GameBoard = styled.table`
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', 'Figtree Variable', sans-serif;
   font-size: 26px;
   margin: 0;
   margin-bottom: 20px;

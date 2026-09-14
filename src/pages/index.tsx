@@ -58,39 +58,26 @@ const Badge = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: ${themeColor('primaryDark')};
   background: ${themeColor('bgColor')};
   border: 1px solid ${themeColor('secondaryLightest')};
   border-radius: 999px;
-  padding: 7px 15px;
+  padding: 6px 14px;
   box-shadow: 0 1px 2px ${themeColor('shadow')};
-`
-
-const BadgeDot = styled.span`
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: ${themeColor('primary')};
-  box-shadow: 0 0 0 3px ${themeColor('secondaryLightest')};
 `
 
 const Title = styled.h1`
   font-size: clamp(36px, 5.4vw, 58px);
   line-height: 1.06;
-  font-weight: 800;
+  font-weight: 750;
   letter-spacing: -0.025em;
   color: ${themeColor('secondary')};
   margin: 22px 0 18px;
 
   .accent {
-    background: linear-gradient(92deg, ${themeColor('primary')} 0%, ${themeColor('primaryDark')} 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: ${themeColor('primaryDark')};
   }
 `
 
@@ -124,23 +111,8 @@ const MetaRow = styled.ul`
   padding: 0;
   list-style: none;
   font-size: 13.5px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${themeColor('muted')};
-
-  li {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  li::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: ${themeColor('primary')};
-    opacity: 0.7;
-  }
 `
 
 const BoardFrame = styled.div`
@@ -151,41 +123,14 @@ const BoardFrame = styled.div`
 `
 
 const BoardCaption = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
   color: ${themeColor('secondaryLight')};
-
-  .legend {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-  }
-
-  .dot-ink {
-    background: ${themeColor('ink')};
-  }
-
-  .dot-blue {
-    background: ${themeColor('primaryDark')};
-  }
 `
 
 const SectionHeading = styled.h2`
   font-size: clamp(24px, 3.4vw, 32px);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: ${themeColor('secondary')};
   text-align: center;
@@ -219,7 +164,7 @@ const CardLink = styled(Link)`
   padding: 26px 24px;
   border: 1px solid ${themeColor('secondaryLightest')};
   border-radius: 18px;
-  background: linear-gradient(180deg, ${themeColor('bgColor')} 0%, ${themeColor('bgSoft')} 100%);
+  background: ${themeColor('bgColor')};
   box-shadow: 0 1px 2px ${themeColor('shadow')};
   color: ${themeColor('secondary')};
   text-decoration: none;
@@ -229,6 +174,11 @@ const CardLink = styled(Link)`
     border-color 0.22s ease,
     box-shadow 0.22s ease;
 
+  :hover {
+    transform: translateY(-2px);
+    border-color: ${themeColor('secondaryLighter')};
+    box-shadow: 0 10px 24px -14px ${themeColor('shadowLg')};
+  }
 
   :focus-visible {
     outline: none;
@@ -244,14 +194,13 @@ const CardLink = styled(Link)`
     border-radius: 13px;
     background: ${themeColor('secondaryLightest')};
     color: ${themeColor('primaryDark')};
-    font-size: 22px;
     margin-bottom: 8px;
-    box-shadow: inset 0 0 0 1px ${themeColor('secondaryLighter')};
   }
 
   .card-title {
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 600;
+    font-family: 'Bricolage Grotesque Variable', sans-serif;
     color: ${themeColor('secondary')};
   }
 
@@ -261,13 +210,39 @@ const CardLink = styled(Link)`
     color: ${themeColor('muted')};
   }
 
+  /* Pin the CTA to the bottom so the links line up across cards with
+  different description lengths. */
   .card-cta {
-    margin-top: 12px;
+    margin-top: auto;
+    padding-top: 12px;
     font-size: 13.5px;
     font-weight: 600;
     color: ${themeColor('primaryDark')};
   }
 `
+
+/* On-brand card icons: 3x3 grid motifs matching the favicon. */
+const PlayIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M9.33 4v16M14.67 4v16M4 9.33h16M4 14.67h16" />
+    <rect x="9.9" y="9.9" width="4.2" height="4.2" fill="currentColor" stroke="none" rx="0.6" />
+  </svg>
+)
+
+const LetterIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M7 19 12 5l5 14M8.8 14.5h6.4" />
+  </svg>
+)
+
+const SheetIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
+    <path d="M7 3.5h7.5L19 8v12.5H7z" />
+    <path d="M14.5 3.5V8H19" />
+    <path d="M10 12.5h6M10 15.5h6M10 18.5h4" />
+  </svg>
+)
 
 const CtaButton = styled.a`
   display: inline-flex;
@@ -283,15 +258,15 @@ const CtaButton = styled.a`
   font-size: 15px;
   line-height: 46px;
   padding: 0 28px;
-  border: 1px solid ${themeColor('primaryDark')};
-  background: linear-gradient(180deg, ${themeColor('primary')} 0%, ${themeColor('primaryDark')} 100%);
-  box-shadow: 0 1px 2px ${themeColor('shadow')}, inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  color: #fff;
-  transition: border-color 0.16s ease, filter 0.16s ease, transform 0.16s ease;
+  border: 1px solid ${themeColor('primary')};
+  background: ${themeColor('primary')};
+  box-shadow: 0 1px 2px ${themeColor('shadow')};
+  color: ${themeColor('bgColor')};
+  transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
 
   :hover {
-    border-color: ${themeColor('secondary')};
-    filter: brightness(0.96);
+    background: ${themeColor('primaryDark')};
+    border-color: ${themeColor('primaryDark')};
     transform: translateY(-1px);
   }
 
@@ -344,7 +319,7 @@ const CtaBand = styled.div`
 
   h2 {
     font-size: clamp(22px, 3vw, 28px);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -0.02em;
     color: ${themeColor('secondary')};
     margin-bottom: 10px;
@@ -367,18 +342,15 @@ const CtaBand = styled.div`
 const IndexPage = () => (
   <Layout>
     <Section>
-      <Hero>          
+      <Hero>
         <HeroCopy>
-          <Badge>
-            <BadgeDot />
-            Sudoku · online + printable
-          </Badge>
+          <Badge>Online and printable</Badge>
           <Title>
             Watch a sudoku <span className="accent">solve itself</span>, then solve one for real
           </Title>
           <Subtitle>
-            A little web app for playing sudoku in the browser and for generating crisp, print-ready A4 sheets of
-            puzzles — 9 games per page, cut along the lines. Free, no sign-up, straight from the grid.
+            Play in the browser, or generate crisp A4 sheets with 9 puzzles a page and cut them along the lines.
+            Free, no sign-up.
           </Subtitle>
           <CtaRow>
             <CtaButton href="/game">Play sudoku</CtaButton>
@@ -387,7 +359,7 @@ const IndexPage = () => (
           <MetaRow>
             <li>No sign-up</li>
             <li>Runs in your browser</li>
-            <li>Prints on A4 / Letter</li>
+            <li>Prints on A4 or Letter</li>
           </MetaRow>
         </HeroCopy>
         <BoardFrame>
@@ -402,30 +374,35 @@ const IndexPage = () => (
       </SectionSub>
       <Cards>
         <CardLink href="/game">
-          <span className="card-icon" aria-hidden>🎯</span>
+          <span className="card-icon" aria-hidden>
+            <PlayIcon />
+          </span>
           <span className="card-title">Play sudoku</span>
           <span className="card-desc">
-            Fill the grid with the number pad, undo, erase, get a hint, or switch on mistakes mode to only accept
+            Fill the grid with the number pad, undo, erase, take a hint, or switch on mistakes mode to only accept
             correct values.
           </span>
-          <span className="card-cta">Open the game →</span>
+          <span className="card-cta">Open the game</span>
         </CardLink>
         <CardLink href="/alphabet-game">
-          <span className="card-icon" aria-hidden>🔤</span>
+          <span className="card-icon" aria-hidden>
+            <LetterIcon />
+          </span>
           <span className="card-title">Alphabet sudoku</span>
           <span className="card-desc">
-            The same puzzle mechanics, with letters instead of numbers — a different grid to solve in the browser.
+            The same puzzle mechanics, with letters instead of digits.
           </span>
-          <span className="card-cta">Open the game →</span>
+          <span className="card-cta">Open the game</span>
         </CardLink>
         <CardLink href="/generator">
-          <span className="card-icon" aria-hidden>🖨️</span>
+          <span className="card-icon" aria-hidden>
+            <SheetIcon />
+          </span>
           <span className="card-title">Printable generator</span>
           <span className="card-desc">
-            Choose how many games and how many starting cells. The sheet prints on A4/Letter with up to six games per
-            page.
+            Pick the page count and the starting numbers, then print crisp A4 sheets with 9 puzzles each.
           </span>
-          <span className="card-cta">Open the generator →</span>
+          <span className="card-cta">Open the generator</span>
         </CardLink>
       </Cards>
 
@@ -433,8 +410,8 @@ const IndexPage = () => (
         <h2>Ready for a fresh puzzle?</h2>
         <p>Every game is generated with a unique solution, and the sheets are ready to print in seconds.</p>
         <CtaRow>
-          <CtaButton href="/game">Start playing</CtaButton>
-          <GhostCtaButton href="/generator">Make a print sheet</GhostCtaButton>
+          <CtaButton href="/game">Play sudoku</CtaButton>
+          <GhostCtaButton href="/generator">Generate a print sheet</GhostCtaButton>
         </CtaRow>
       </CtaBand>
     </Section>

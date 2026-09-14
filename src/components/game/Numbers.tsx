@@ -16,7 +16,7 @@ const StatusNumber = styled.button`
   border: 1px solid ${themeColor('secondaryLightest')};
   background: ${themeColor('bgSoft')};
   color: ${themeColor('secondary')};
-  font-family: 'Noto Sans', 'Source Sans Pro', sans-serif;
+  font-family: 'Noto Sans', 'Figtree Variable', sans-serif;
   font-size: 22px;
   font-weight: 600;
   line-height: 1;

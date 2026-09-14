@@ -1,19 +1,24 @@
 import { createGlobalStyle } from 'styled-components'
 import type { DefaultTheme } from 'styled-components'
 
+/* Fonts are self-hosted via Fontsource and imported in _app.tsx.
+ * 'Bricolage Grotesque Variable' is a display face (real 200-800 weights,
+ * so no fake-bolding); 'Figtree Variable' is the body face; 'Noto Sans'
+ * stays as the digit face for boards and the print preview, where it must
+ * match what the printer emits. */
 export const theme = {
   colors: {
-    bgColor: '#fff',
+    bgColor: 'hsl(210, 33%, 99.5%)',
     bgSoft: 'hsl(210, 33%, 98%)',
-    primary: 'hsl(210, 88%, 56%)',
-    primaryDark: 'hsl(212, 78%, 38%)',
+    primary: 'hsl(211, 80%, 52%)',
+    primaryDark: 'hsl(213, 76%, 36%)',
     secondary: 'hsl(213, 30%, 29%)',
     secondaryLight: 'hsl(213, 30%, 59%)',
     secondaryLighter: 'hsl(213, 30%, 79%)',
     secondaryLightest: 'hsl(213, 30%, 92%)',
     ternary: 'hsl(34, 26%, 89%)',
     ternaryDark: 'hsl(34, 76%, 89%)',
-    text: '#000',
+    text: 'hsl(213, 35%, 16%)',
     ink: 'hsl(213, 35%, 16%)',
     gridLine: 'hsl(213, 25%, 78%)',
     muted: 'hsl(213, 12%, 42%)',
@@ -48,16 +53,28 @@ html {
 body {
   background: ${themeColor('bgColor')};
   color: ${themeColor('text')};
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Figtree Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.4em;
   font-weight: 300;
   min-height: 100vh;
+  /* The hero's grid-paper backdrop intentionally bleeds past the viewport;
+  clip (not hidden) so sticky positioning in the header keeps working. */
+  overflow-x: clip;
 
   @media screen {
     background:
       radial-gradient(1200px 600px at 50% -200px, ${themeColor('secondaryLightest')} 0%, transparent 70%),
       ${themeColor('bgSoft')};
   }
+}
+
+/* Display face: wordmark + all headlines (the app sets them per component,
+ * this is the catch-all so no heading ever falls back to the body face). */
+h1,
+h2,
+h3,
+.logo {
+  font-family: 'Bricolage Grotesque Variable', 'Figtree Variable', sans-serif;
 }
 
 img, svg { display: block; max-width: 100%; }

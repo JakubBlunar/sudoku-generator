@@ -26,7 +26,7 @@ const Board = styled.table`
   border-collapse: collapse;
   width: 100%;
   background: #fff;
-  font-family: 'Noto Sans', 'Source Sans Pro', sans-serif;
+  font-family: 'Noto Sans', 'Figtree Variable', sans-serif;
 
   td {
     text-align: center;

@@ -21,7 +21,7 @@ const OverlayWrapper = styled.div<{ visible: boolean }>`
     text-align: center;
     top: 50%;
     left: 50%;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Figtree Variable', sans-serif;
     font-size: 60px;
     font-weight: 600;
     color: ${themeColor('ternary')};
