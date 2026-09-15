@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { themeColor } from '../../theme'
 
@@ -22,7 +23,7 @@ const HeaderWrapper = styled.header`
     align-items: baseline;
     font-size: 27px;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.015em;
     line-height: 1;
     text-decoration: none;
 
@@ -59,28 +60,37 @@ const HeaderWrapper = styled.header`
     display: inline-block;
     outline: none;
     cursor: pointer;
-    padding: 0 16px;
-    background-color: ${themeColor('secondary')};
+    padding: 0 14px;
+    background-color: transparent;
     border-radius: 10px;
-    border: 1px solid ${themeColor('secondary')};
-    color: ${themeColor('bgColor')};
+    border: 1px solid transparent;
+    color: ${themeColor('muted')};
     font-size: 13.5px;
     line-height: 38px;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     text-decoration: none;
-    transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
 
     &:hover {
-      background-color: ${themeColor('primaryDark')};
-      border-color: ${themeColor('primaryDark')};
-      box-shadow: 0 6px 16px ${themeColor('shadowLg')};
+      background-color: ${themeColor('secondaryLightest')};
+      color: ${themeColor('secondary')};
     }
-  }
 
-  .btn.primary {
-    background: linear-gradient(180deg, ${themeColor('primary')} 0%, ${themeColor('primaryDark')} 100%);
-    border-color: ${themeColor('primaryDark')};
+    &:focus-visible {
+      box-shadow: 0 0 0 3px ${themeColor('secondaryLighter')};
+    }
+
+    &[aria-current='page'] {
+      background-color: ${themeColor('secondary')};
+      border-color: ${themeColor('secondary')};
+      color: ${themeColor('bgColor')};
+
+      &:hover {
+        background-color: ${themeColor('secondary')};
+        color: ${themeColor('bgColor')};
+      }
+    }
   }
 
   @media (max-width: 720px) {
@@ -123,7 +133,16 @@ const HeaderWrapper = styled.header`
   }
 `
 
+const NAV = [
+  { href: '/game', label: 'Play sudoku', path: '/game' },
+  { href: '/alphabet-game', label: 'Alphabet sudoku', path: '/alphabet-game' },
+  { href: '/generator', label: 'Generator', path: '/generator' }
+]
+
 export const Header = () => {
+  const { asPath } = useRouter()
+  const path = asPath.split('?')[0]
+
   return (
     <HeaderWrapper className="header">
       <Link href="/" className="logo">
@@ -132,15 +151,16 @@ export const Header = () => {
         <span className="g3">ku</span>
       </Link>
       <nav>
-        <Link href="/game" className="btn">
-          Play sudoku
-        </Link>
-        <Link href="/alphabet-game" className="btn">
-          Alphabet
-        </Link>
-        <Link href="/generator" className="btn primary">
-          Generator
-        </Link>
+        {NAV.map(({ href, label, path: activePath }) => (
+          <Link
+            key={href}
+            href={href}
+            className="btn"
+            aria-current={path === activePath ? 'page' : undefined}
+          >
+            {label}
+          </Link>
+        ))}
       </nav>
     </HeaderWrapper>
   )

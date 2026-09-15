@@ -43,7 +43,8 @@ const MistakeModeWrapper = styled.div<{ $active: boolean }>`
     width: 40px;
     height: 22px;
     flex: 0 0 auto;
-
+    cursor: pointer;
+    
     input {
       opacity: 0;
       position: absolute;

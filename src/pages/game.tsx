@@ -6,8 +6,8 @@ import { SudokuProvider } from '../context/SudokuContext'
 const GamePage = () => (
   <Layout>
     <Head>
-      <title>Sudoku game</title>
-      <meta name="description" content="Play free sudoku" />
+      <title>Play sudoku — Sudoku</title>
+      <meta name="description" content="Free online sudoku with undo, hints, mistakes mode and an auto-generating board." />
     </Head>
     <SudokuProvider>
       <Game />

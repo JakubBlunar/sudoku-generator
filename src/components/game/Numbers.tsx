@@ -1,4 +1,3 @@
-import _, { reduce } from 'lodash'
 import styled from 'styled-components'
 import { CharacterMap } from '../../utils'
 import { useSudokuContext } from '../../context/SudokuContext'
@@ -16,7 +15,7 @@ const StatusNumber = styled.button`
   border: 1px solid ${themeColor('secondaryLightest')};
   background: ${themeColor('bgSoft')};
   color: ${themeColor('secondary')};
-  font-family: 'Noto Sans', 'Source Sans Pro', sans-serif;
+  font-family: 'Noto Sans', 'Figtree Variable', sans-serif;
   font-size: 22px;
   font-weight: 600;
   line-height: 1;
@@ -64,10 +63,10 @@ export const Numbers = ({ onClickNumber, characterMap }: NumbersProps) => {
 
   return (
     <NumbersWrapper>
-      {_.times(9, n => {
+      {Array.from({ length: 9 }, (_x, n) => {
         const number = n + 1
         const stringNum = `${number}`
-        const count = reduce(gameArray, (acc, value) => acc + (value == stringNum ? 1 : 0), 0)
+        const count = gameArray.reduce((acc, value) => acc + (value === stringNum ? 1 : 0), 0)
 
         return (
           <StatusNumber

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useSudokuContext } from '../../context/SudokuContext'
-import moment from 'moment'
 import styled from 'styled-components'
 import { themeColor } from '../../theme'
-import { isSSR } from '../../utils'
+import { formatClock, isSSR } from '../../utils'
 
 const TimeBox = styled.div`
   display: inline-flex;
@@ -12,45 +11,45 @@ const TimeBox = styled.div`
   gap: 6px;
   text-align: center;
   width: 104px;
-  font-family: 'TEKO', sans-serif;
-  font-size: 27px;
+  font-family: 'Figtree Variable', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.04em;
   height: 40px;
   font-variant-numeric: tabular-nums;
   color: ${themeColor('secondary')};
-  background: linear-gradient(180deg, ${themeColor('secondaryLightest')} 0%, ${themeColor('ternary')} 100%);
+  background: ${themeColor('secondaryLightest')};
   border: 1px solid ${themeColor('secondaryLighter')};
   border-radius: 12px;
-  padding: 8px 16px 3px;
+  padding: 4px 16px 3px;
 `
 
 const useTimer = () => {
-  let [currentTime, setCurrentTime] = useState(moment())
-  let { timeGameStarted, won } = useSudokuContext()
+  const [now, setNow] = useState(Date.now())
+  const { timeGameStarted, won } = useSudokuContext()
 
-  const tick = () => {
-    setCurrentTime(moment())
-  }
-
+  // Poll the wall clock every 200ms and derive the display from
+  // (now - timeGameStarted). The old 1000ms setInterval skipped a
+  // displayed second whenever a tick was delayed by a frame (the clock
+  // appeared to pause, then jump two). formatClock returns the same
+  // string for up to 5 consecutive polls, so React re-renders only once
+  // per displayed second.
   useEffect(() => {
-    if (isSSR()) return
-    if (!won) setTimeout(() => tick(), 1000)
-  })
+    if (isSSR() || won) return
+    setNow(Date.now())
+    const id = setInterval(() => {
+      setNow(prev => {
+        const next = Date.now()
+        // Same displayed second -> keep the identical state value so
+        // React bails out of the re-render.
+        return formatClock(timeGameStarted, next) === formatClock(timeGameStarted, prev) ? prev : next
+      })
+    }, 200)
+    return () => clearInterval(id)
+  }, [won, timeGameStarted])
 
-  let secondsTotal = currentTime.diff(timeGameStarted, 'seconds')
-  if (secondsTotal <= 0) return '00:00'
-  let duration = moment.duration(secondsTotal, 'seconds')
-  let hours = duration.hours()
-  let minutes = duration.minutes()
-  let seconds = duration.seconds()
-  let stringTimer = ''
-
-  stringTimer += hours ? '' + hours + ':' : ''
-  stringTimer += minutes ? (minutes < 10 ? '0' : '') + minutes + ':' : '00:'
-  stringTimer += seconds < 10 ? '0' + seconds : seconds
-
-  return stringTimer
+  return formatClock(timeGameStarted, now)
 }
 
 export const Timer = () => {

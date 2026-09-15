@@ -6,9 +6,10 @@
   "license": "MIT",
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@fontsource/noto-sans": "^5.3.0",
     "@vercel/analytics": "^2.0.1",
-    "lodash": "^4.17.21",
-    "moment": "2.29.3",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -24,12 +25,7 @@
     "start": "next start -p $PORT"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/lodash": "^4.17.20",
     "@types/node": "24.13.3",
-    "@types/qs": "^6.9.7",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
     "babel-plugin-styled-components": "^2.0.7"

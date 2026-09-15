@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { getSudoku } from './sudoku'
 
 /**
@@ -53,7 +52,7 @@ import { getSudoku } from './sudoku'
  * and so on...
  */
 
-let nullArray = _.times(81, () => '0')
+let nullArray = Array(81).fill('0')
 
 function _getBoxCenter(box: number) {
   // eslint-disable-next-line

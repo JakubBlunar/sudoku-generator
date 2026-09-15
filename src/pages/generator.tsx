@@ -40,7 +40,7 @@ const ControlBar = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   padding: 18px 22px;
-  background: #fff;
+  background: ${themeColor('bgColor')};
   border: 1px solid ${themeColor('secondaryLightest')};
   border-radius: 14px;
   box-shadow: 0 12px 30px -22px ${themeColor('shadowLg')};
@@ -62,7 +62,7 @@ const Field = styled.label`
 
   .field-name {
     font-size: 13px;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: 0.02em;
     color: ${themeColor('muted')};
   }
@@ -93,7 +93,7 @@ const ActionCol = styled.div`
 const Hint = styled.small`
   color: ${themeColor('muted')};
   font-size: 12px;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
 `
 
@@ -151,7 +151,7 @@ const PuzzleSlot = styled.figure`
 
   figcaption {
     font-size: 13px;
-    font-weight: 650;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
     color: ${themeColor('muted')};
 
@@ -174,16 +174,28 @@ const GenerateButton = styled(Button)`
 `
 
 const SecondaryButton = styled(Button)`
-  border: 1px solid ${themeColor('primaryDark')};
-  background: #fff;
+  border: 1px solid ${themeColor('secondaryLighter')};
+  background: ${themeColor('bgColor')};
   color: ${themeColor('ink')};
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
   :hover {
     background: ${themeColor('secondaryLightest')};
-    box-shadow: 0 6px 18px ${themeColor('shadowLg')}, inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: ${themeColor('secondaryLighter')};
+    box-shadow: 0 6px 18px ${themeColor('shadowLg')};
   }
 `
+
+const RegenerateIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6" />
+  </svg>
+)
+
+const PrintIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z" />
+  </svg>
+)
 
 export default function Generator() {
   const [pages, setPages] = useState(3)
@@ -289,16 +301,16 @@ export default function Generator() {
                 onClick={() => setGeneration((g) => g + 1)}
                 disabled={generating}
               >
-                🔁 Regenerate
+                <RegenerateIcon /> Regenerate
               </SecondaryButton>
               <GenerateButton type="button" onClick={() => window.print()} disabled={generating || sheets.length === 0}>
-                🖨️ Print
+                <PrintIcon /> Print
               </GenerateButton>
             </ActionButtons>
             <Hint aria-live="polite">
               {generating
                 ? `Generating… ${doneSheets}/${Math.min(MAX_PAGES, pages)} pages`
-                : `${totalPuzzles} puzzles · A4 portrait`}
+                : `${totalPuzzles} puzzles, A4 portrait`}
             </Hint>
           </ActionCol>
         </ControlBar>

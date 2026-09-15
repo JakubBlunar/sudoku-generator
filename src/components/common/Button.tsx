@@ -25,14 +25,16 @@ const base = css`
 export const Button = styled.button`
   ${base}
   padding: 0 18px;
-  border: 1px solid ${themeColor('primaryDark')};
-  background: linear-gradient(180deg, ${themeColor('primary')} 0%, ${themeColor('primaryDark')} 100%);
-  box-shadow: 0 1px 2px ${themeColor('shadow')}, inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  color: #fff;
+  border: 1px solid ${themeColor('primary')};
+  background: ${themeColor('primary')};
+  box-shadow: 0 1px 2px ${themeColor('shadow')};
+  color: ${themeColor('bgColor')};
   font-size: 14px;
   line-height: 38px;
 
   :hover {
-    box-shadow: 0 6px 18px ${themeColor('shadowLg')}, inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    background: ${themeColor('primaryDark')};
+    border-color: ${themeColor('primaryDark')};
+    box-shadow: 0 6px 18px ${themeColor('shadowLg')};
   }
 `
