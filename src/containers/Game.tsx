@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import moment from 'moment'
 import { GameSection } from '../components/layout/GameSection'
 import { StatusSection } from '../components/layout/StatusSection'
 import { getUniqueSudoku } from '../solver/UniqueSudoku'
@@ -7,7 +6,7 @@ import { useSudokuContext } from '../context/SudokuContext'
 import styled from 'styled-components'
 import { ThemeColor, themeColor } from '../theme'
 import { Overlay } from '../components/Overlay'
-import { CharacterMap, defaultCharacterMap, isSSR } from '../utils'
+import { CharacterMap, defaultCharacterMap, formatClock, isSSR } from '../utils'
 
 const GamePageCard = styled.div`
   width: 100%;
@@ -119,19 +118,11 @@ const WinHint = styled.span`
   color: ${themeColor('secondaryLight')};
 `
 
-const formatElapsed = (started: moment.Moment) => {
-  const total = Math.max(0, moment().diff(started, 'seconds'))
-  const m = Math.floor(total / 60)
-  const s = total % 60
-  return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`
-}
-
 type GameProps = {
   characterMap?: CharacterMap
-  maxWidth?: number
 }
 
-export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: GameProps) => {
+export const Game = ({ characterMap = defaultCharacterMap }: GameProps) => {
   const {
     setNumberSelected,
     gameArray,
@@ -162,7 +153,7 @@ export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: Gam
     setGameArray(temporaryInitArray)
     setSolvedArray(temporarySolvedArray)
     setNumberSelected('0')
-    setTimeGameStarted(moment())
+    setTimeGameStarted(Date.now())
     setCellSelected(-1)
     setHistory([])
     setMistake(null)
@@ -193,7 +184,7 @@ export const Game = ({ characterMap = defaultCharacterMap, maxWidth = 720 }: Gam
       setGameArray(tempArray)
 
       if (isSolved(index, value)) {
-        setFinalTime(formatElapsed(timeGameStarted))
+        setFinalTime(formatClock(timeGameStarted, Date.now()))
         setOverlay(true)
         setWon(true)
       }

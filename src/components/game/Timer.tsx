@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useSudokuContext } from '../../context/SudokuContext'
-import moment from 'moment'
 import styled from 'styled-components'
 import { themeColor } from '../../theme'
-import { isSSR } from '../../utils'
+import { formatClock, isSSR } from '../../utils'
 
 const TimeBox = styled.div`
   display: inline-flex;
@@ -27,31 +26,20 @@ const TimeBox = styled.div`
 `
 
 const useTimer = () => {
-  let [currentTime, setCurrentTime] = useState(moment())
-  let { timeGameStarted, won } = useSudokuContext()
+  const [now, setNow] = useState(Date.now())
+  const { timeGameStarted, won } = useSudokuContext()
 
-  const tick = () => {
-    setCurrentTime(moment())
-  }
-
+  // One interval, cleared on unmount / win. The old version scheduled a
+  // fresh setTimeout on *every render* with no deps or cleanup, so the
+  // tickers stacked and the clock ran fast.
   useEffect(() => {
-    if (isSSR()) return
-    if (!won) setTimeout(() => tick(), 1000)
-  })
+    if (isSSR() || won) return
+    setNow(Date.now())
+    const id = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(id)
+  }, [won])
 
-  let secondsTotal = currentTime.diff(timeGameStarted, 'seconds')
-  if (secondsTotal <= 0) return '00:00'
-  let duration = moment.duration(secondsTotal, 'seconds')
-  let hours = duration.hours()
-  let minutes = duration.minutes()
-  let seconds = duration.seconds()
-  let stringTimer = ''
-
-  stringTimer += hours ? '' + hours + ':' : ''
-  stringTimer += minutes ? (minutes < 10 ? '0' : '') + minutes + ':' : '00:'
-  stringTimer += seconds < 10 ? '0' + seconds : seconds
-
-  return stringTimer
+  return formatClock(timeGameStarted, now)
 }
 
 export const Timer = () => {

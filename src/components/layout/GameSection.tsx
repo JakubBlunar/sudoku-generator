@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import styled, { keyframes } from 'styled-components'
 import { useSudokuContext } from '../../context/SudokuContext'
 import { themeColor } from '../../theme'
@@ -141,7 +140,7 @@ type GameSectionProps = {
 }
 
 export const GameSection = ({ onClick, characterMap }: GameSectionProps) => {
-  const rows = _.times(9, x => x)
+  const rows = Array.from({ length: 9 }, (_e, i) => i)
   let { gameArray, cellSelected, initArray, mistake } = useSudokuContext()
 
   const boxIndex = (row: number, column: number) => Math.floor(row / 3) * 3 + Math.floor(column / 3)
@@ -168,10 +167,10 @@ export const GameSection = ({ onClick, characterMap }: GameSectionProps) => {
   return (
     <GameBoard>
       <tbody>
-        {_.map(rows, row => {
+        {rows.map(row => {
           return (
             <tr className="row" key={row}>
-              {_.map(rows, column => {
+              {rows.map(column => {
                 const indexOfArray = row * 9 + column
                 const value = gameArray[indexOfArray]
                 const isGiven = initArray[indexOfArray] !== '0'

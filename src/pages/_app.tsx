@@ -30,6 +30,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           <meta property="og:url" content={SITE} />
           <meta property="og:title" content="Sudoku, online and printable" />
           <meta property="og:description" content="Play sudoku in the browser or generate crisp A4 sheets of puzzles. Free, no sign-up." />
+          <meta property="og:image" content={`${SITE}/og-image.png`} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content="Sudoku, online and printable" />
+          <meta name="twitter:card" content="summary_large_image" />
         </Head>
         <Component {...pageProps} />
         <Analytics />

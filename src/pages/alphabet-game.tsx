@@ -22,7 +22,6 @@ const GamePage = () => (
           '8': 'H',
           '9': 'I'
         }}
-        maxWidth={740}
       />
     </SudokuProvider>
   </Layout>
