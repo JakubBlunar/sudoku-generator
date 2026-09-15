@@ -12,6 +12,8 @@ export const theme = {
     bgSoft: 'hsl(210, 33%, 98%)',
     primary: 'hsl(211, 80%, 52%)',
     primaryDark: 'hsl(213, 76%, 36%)',
+    primaryLight: 'hsl(211, 84%, 89%)',
+    primaryLightest: 'hsl(211, 88%, 96%)',
     secondary: 'hsl(213, 30%, 29%)',
     secondaryLight: 'hsl(213, 30%, 59%)',
     secondaryLighter: 'hsl(213, 30%, 79%)',

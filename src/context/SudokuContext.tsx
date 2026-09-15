@@ -12,6 +12,8 @@ type SudokuContextProps = {
   setTimeGameStarted: React.Dispatch<React.SetStateAction<moment.Moment>>
   cellSelected: number
   setCellSelected: React.Dispatch<React.SetStateAction<number>>
+  mistake: { index: number; value: string; nonce: number } | null
+  setMistake: React.Dispatch<React.SetStateAction<{ index: number; value: string; nonce: number } | null>>
   initArray: string[]
   setInitArray: React.Dispatch<React.SetStateAction<string[]>>
   won: boolean
@@ -29,6 +31,8 @@ const SudokuContext = createContext<SudokuContextProps>({
   setTimeGameStarted: () => {},
   cellSelected: -1,
   setCellSelected: () => {},
+  mistake: null,
+  setMistake: () => {},
   initArray: [],
   setInitArray: () => {},
   won: false,
@@ -45,6 +49,7 @@ export const SudokuProvider = ({ children }: SudokuProviderProps) => {
   const [difficulty, setDifficulty] = useState<string>('Easy')
   const [timeGameStarted, setTimeGameStarted] = useState<moment.Moment>(moment())
   const [cellSelected, setCellSelected] = useState<number>(-1)
+  const [mistake, setMistake] = useState<{ index: number; value: string; nonce: number } | null>(null)
   const [initArray, setInitArray] = useState<string[]>([])
   const [won, setWon] = useState<boolean>(false)
 
@@ -61,6 +66,8 @@ export const SudokuProvider = ({ children }: SudokuProviderProps) => {
         setTimeGameStarted,
         cellSelected,
         setCellSelected,
+        mistake,
+        setMistake,
         initArray,
         setInitArray,
         won,
