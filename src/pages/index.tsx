@@ -175,7 +175,7 @@ const WayRow = styled(Link)`
     border-top: 1px solid ${themeColor('secondaryLightest')};
   }
 
-  :hover {
+  &:hover {
     background: ${themeColor('bgSoft')};
   }
 
@@ -419,6 +419,7 @@ const CtaBand = styled.section`
   p {
     max-width: 480px;
     margin: 0;
+    margin-top: 15px;
     font-size: 15px;
     line-height: 1.6;
     color: ${themeColor('muted')};
@@ -435,7 +436,7 @@ const CtaBand = styled.section`
     padding: 40px 28px;
 
     p {
-      margin: 0 auto;
+      margin: 15px auto;
     }
 
     ${CtaRow} {
