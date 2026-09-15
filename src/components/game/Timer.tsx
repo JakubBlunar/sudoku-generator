@@ -29,15 +29,25 @@ const useTimer = () => {
   const [now, setNow] = useState(Date.now())
   const { timeGameStarted, won } = useSudokuContext()
 
-  // One interval, cleared on unmount / win. The old version scheduled a
-  // fresh setTimeout on *every render* with no deps or cleanup, so the
-  // tickers stacked and the clock ran fast.
+  // Poll the wall clock every 200ms and derive the display from
+  // (now - timeGameStarted). The old 1000ms setInterval skipped a
+  // displayed second whenever a tick was delayed by a frame (the clock
+  // appeared to pause, then jump two). formatClock returns the same
+  // string for up to 5 consecutive polls, so React re-renders only once
+  // per displayed second.
   useEffect(() => {
     if (isSSR() || won) return
     setNow(Date.now())
-    const id = setInterval(() => setNow(Date.now()), 1000)
+    const id = setInterval(() => {
+      setNow(prev => {
+        const next = Date.now()
+        // Same displayed second -> keep the identical state value so
+        // React bails out of the re-render.
+        return formatClock(timeGameStarted, next) === formatClock(timeGameStarted, prev) ? prev : next
+      })
+    }, 200)
     return () => clearInterval(id)
-  }, [won])
+  }, [won, timeGameStarted])
 
   return formatClock(timeGameStarted, now)
 }
