@@ -22,7 +22,7 @@ const HeaderWrapper = styled.header`
     display: inline-flex;
     align-items: baseline;
     font-size: 27px;
-    font-weight: 750;
+    font-weight: 700;
     letter-spacing: -0.015em;
     line-height: 1;
     text-decoration: none;

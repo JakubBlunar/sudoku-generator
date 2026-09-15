@@ -71,7 +71,7 @@ const Badge = styled.span`
 const Title = styled.h1`
   font-size: clamp(36px, 5.4vw, 58px);
   line-height: 1.06;
-  font-weight: 750;
+  font-weight: 700;
   letter-spacing: -0.025em;
   color: ${themeColor('secondary')};
   margin: 22px 0 18px;
@@ -200,7 +200,7 @@ const CardLink = styled(Link)`
   .card-title {
     font-size: 17px;
     font-weight: 600;
-    font-family: 'Bricolage Grotesque Variable', sans-serif;
+    font-family: 'Space Grotesk Variable', sans-serif;
     color: ${themeColor('secondary')};
   }
 

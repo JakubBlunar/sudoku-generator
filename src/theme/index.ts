@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 import type { DefaultTheme } from 'styled-components'
 
 /* Fonts are self-hosted via Fontsource and imported in _app.tsx.
- * 'Bricolage Grotesque Variable' is a display face (real 200-800 weights,
+ * 'Space Grotesk Variable' is the display face (real 300-700 weights,
  * so no fake-bolding); 'Figtree Variable' is the body face; 'Noto Sans'
  * stays as the digit face for boards and the print preview, where it must
  * match what the printer emits. */
@@ -77,7 +77,7 @@ h1,
 h2,
 h3,
 .logo {
-  font-family: 'Bricolage Grotesque Variable', 'Figtree Variable', sans-serif;
+  font-family: 'Space Grotesk Variable', 'Figtree Variable', sans-serif;
 }
 
 img, svg { display: block; max-width: 100%; }

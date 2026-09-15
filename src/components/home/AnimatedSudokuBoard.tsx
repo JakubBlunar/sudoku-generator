@@ -190,7 +190,7 @@ const Cell = styled.div<{
   align-items: center;
   justify-content: center;
   font-size: clamp(12px, 2.9vw, 22px);
-  font-weight: ${({ $given }) => ($given ? 750 : 600)};
+  font-weight: ${({ $given }) => ($given ? 700 : 600)};
   font-variant-numeric: tabular-nums;
   user-select: none;
   color: ${({ $filled, $given }) => (!$filled ? 'transparent' : $given ? theme.colors.ink : theme.colors.primaryDark)};

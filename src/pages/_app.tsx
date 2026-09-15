@@ -6,12 +6,12 @@ import { Analytics } from '@vercel/analytics/next'
 import { shouldForwardProp } from '../should-forward-prop'
 
 /* Self-hosted fonts (Fontsource):
- * - Bricolage Grotesque (variable 200-800): wordmark + headlines
+ * - Space Grotesk (variable 300-700): wordmark + headlines
  * - Figtree (variable 300-900): body text
  * - Noto Sans 400/700: board digits + print preview (same face the printer
  *   was designed around, so the printed sheets keep their exact look)
  * CSS-only imports: processed at build time, no runtime fetch, no CLS. */
-import '@fontsource-variable/bricolage-grotesque/wght.css'
+import '@fontsource-variable/space-grotesk/wght.css'
 import '@fontsource-variable/figtree/wght.css'
 import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/700.css'
