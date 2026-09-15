@@ -43,7 +43,7 @@ def main():
 
     # --- left: the brand tile (rounded, white grid, open center cell) -----
     tile = 420
-    tx, ty = 120, (H - tile) // 2
+    tx, ty = 120, (H - tile) // 2 + 12
     radius = 92
     # white tile body
     d.rounded_rectangle([tx, ty, tx + tile, ty + tile], radius=radius, fill=WHITE)
