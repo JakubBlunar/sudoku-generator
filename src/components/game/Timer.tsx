@@ -23,7 +23,7 @@ const TimeBox = styled.div`
   background: ${themeColor('secondaryLightest')};
   border: 1px solid ${themeColor('secondaryLighter')};
   border-radius: 12px;
-  padding: 8px 16px 3px;
+  padding: 4px 16px 3px;
 `
 
 const useTimer = () => {

@@ -93,7 +93,7 @@ const ActionCol = styled.div`
 const Hint = styled.small`
   color: ${themeColor('muted')};
   font-size: 12px;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
 `
 

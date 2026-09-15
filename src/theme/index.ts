@@ -57,11 +57,14 @@ body {
   line-height: 1.4em;
   font-weight: 300;
   min-height: 100vh;
-  /* The hero's grid-paper backdrop intentionally bleeds past the viewport;
-  clip (not hidden) so sticky positioning in the header keeps working. */
-  overflow-x: clip;
 
   @media screen {
+    /* The hero's grid-paper backdrop intentionally bleeds ~14px past the
+    viewport (a pre-existing look the audit says to keep). Clip (not hidden)
+    so the sticky header keeps working. Screen-only: the print path must
+    stay exactly as the original design emitted it, so nothing global may
+    leak into @media print. */
+    overflow-x: clip;
     background:
       radial-gradient(1200px 600px at 50% -200px, ${themeColor('secondaryLightest')} 0%, transparent 70%),
       ${themeColor('bgSoft')};
