@@ -16,7 +16,10 @@ import '@fontsource-variable/figtree/wght.css'
 import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/700.css'
 
-const SITE = 'https://sudoku-gtr.vercel.app'
+// Public origin for og:/twitter: meta tags. Baked in at build time
+// (NEXT_PUBLIC_*) — Vercel sets it to the Vercel URL, the Docker build
+// sets it to the VPS host (see Dockerfile / docker-compose.yml).
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://sudoku-gtr.vercel.app'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
