@@ -2,7 +2,6 @@ import { GlobalStyle, theme } from '../theme'
 import { StyleSheetManager, ThemeProvider } from 'styled-components'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Analytics } from '@vercel/analytics/next'
 import { shouldForwardProp } from '../should-forward-prop'
 
 /* Self-hosted fonts (Fontsource):
@@ -17,9 +16,9 @@ import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/700.css'
 
 // Public origin for og:/twitter: meta tags. Baked in at build time
-// (NEXT_PUBLIC_*) — Vercel sets it to the Vercel URL, the Docker build
-// sets it to the VPS host (see Dockerfile / docker-compose.yml).
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://sudoku-gtr.vercel.app'
+// (NEXT_PUBLIC_*) — the Docker build sets it to the VPS host
+// (see Dockerfile / docker-compose.yml).
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://sudoku.jablu.sk'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -40,7 +39,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
         <Component {...pageProps} />
-        <Analytics />
       </StyleSheetManager>
     </ThemeProvider>
   )
