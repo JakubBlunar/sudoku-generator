@@ -3,6 +3,15 @@ set -euo pipefail
 
 COMPOSE="docker compose"
 
+# Fail early with a clear message if the shared Traefik network is missing.
+if ! docker network inspect web >/dev/null 2>&1; then
+  echo "✗ External Docker network 'web' not found."
+  echo "  Create it (it is the network Traefik routes on):"
+  echo "    docker network create web"
+  exit 1
+fi
+
+
 echo "╔══════════════════════════════════════════╗"
 echo "║        Sudoku — Deploy Script           ║"
 echo "╚══════════════════════════════════════════╝"
