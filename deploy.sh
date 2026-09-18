@@ -28,7 +28,7 @@ echo ""
 echo "→ Waiting for the app to be healthy..."
 timeout=90
 elapsed=0
-until $COMPOSE exec -T sudoku wget -q --spider http://localhost:3000 2>/dev/null; do
+until $COMPOSE exec -T sudoku wget -q --spider http://127.0.0.1:3000 2>/dev/null; do
   sleep 2
   elapsed=$((elapsed + 2))
   if [ $elapsed -ge $timeout ]; then
